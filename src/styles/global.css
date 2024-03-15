@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/public/fonts/Mona-Sans.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  font-family: 'Figtree', 'Helvetica Neue', sans-serif, system-ui;
+  font-size: 16px;
+}
+
+.article-content {
+  @apply text-beige-500;
+
+  h1 {
+    @apply text-4xl font-semibold mb-4;
+  }
+  h2 {
+    @apply text-3xl font-semibold mb-4;
+  }
+  h3 {
+    @apply text-2xl font-semibold mb-4;
+  }
+  h4 {
+    @apply text-xl font-semibold mb-4;
+  }
+  h5 {
+    @apply text-lg font-semibold mb-4;
+  }
+  h6 {
+    @apply text-base font-semibold mb-4;
+  }
+  p {
+    @apply text-base mb-4;
+  }
+  pre {
+    @apply p-4 rounded-[4px] mb-4;
+  }
+  abbr {
+    all: unset;
+    @apply text-base italic;
+  }
+  kbd {
+    @apply bg-transparent text-sm;
+
+    kbd {
+      all: unset;
+      @apply bg-beige-500 text-tropicalblue-700 p-1 mx-1 rounded-[2px];
+    }
+  }
+  mark {
+    @apply bg-sand-500 text-tropicalblue-700 px-1 py-[2px] mx-1 rounded-[2px];
+  }
+  blockquote {
+    @apply flex pl-4 mb-4 border-l-4 border-tropicalblue-200;
+
+    p {
+      @apply mb-0;
+    }
+
+    a {
+      @apply font-semibold text-sand-500 ml-1;
+    }
+  }
+  pre {
+    @apply bg-beige-500 !important;
+  }
+  ol {
+    @apply list-inside list-decimal mb-4;
+  }
+  ul {
+    @apply list-inside list-disc mb-4;
+
+    ul {
+      @apply ml-4;
+    }
+  }
+}
+
+.footnotes {
+  @apply border-beige-500 border-t-2 py-4;
+
+  ol {
+    li {
+      p {
+        @apply inline mb-2;
+
+        a.data-footnote-backref {
+          @apply text-sand-500;
+        }
+      }
+    }
+  }
+}
+
+/* TODO: Support markdown tables */
+
+.sr-only {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+
+  clip: rect(1px 1px 1px 1px);
+
+  clip: rect(1px, 1px, 1px, 1px);
+
+  clip-path: inset(50%);
+
+  white-space: nowrap;
+}

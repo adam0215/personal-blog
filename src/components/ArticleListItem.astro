@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+type ArticleType = {
+	title: CollectionEntry<'articles'>['data']['title']
+	description: CollectionEntry<'articles'>['data']['description']
+	pubDate: CollectionEntry<'articles'>['data']['pubDate']
+	updatedDate: CollectionEntry<'articles'>['data']['updatedDate']
+	slug: CollectionEntry<'articles'>['slug']
+}
+
+type Props = {
+	title?: ArticleType['title']
+	description?: ArticleType['description']
+	pubDate?: ArticleType['pubDate']
+	updatedDate?: ArticleType['updatedDate']
+	slug?: ArticleType['slug']
+}
+
+const { title, description, pubDate, updatedDate, slug } = Astro.props
+---
+
+<a
+	href={`/articles/${slug}`}
+	class='group flex flex-col gap-2 min-w-72 max-w-96 cursor-pointer transition-all duration-200 hover:text-tropicalblue-700'
+>
+	<div class='inline-flex items-baseline gap-2 font-semibold text-2xl'>
+		<span>{title}</span>
+		<span
+			class='text-tropicalblue-200 transition-all duration-200 group-hover:text-tropicalblue-700'
+			>{pubDate?.toLocaleDateString()}</span
+		>
+	</div>
+	<span>{description}</span>
+</a>

@@ -1,0 +1,12 @@
+---
+import Logo from './Logo.astro'
+
+const today = new Date()
+---
+
+<header class="w-full py-32">
+  <nav class="flex justify-between items-center w-full">
+    <Logo class="w-12 fill-beige-500" />
+    &copy; {today.getFullYear()} Adam Gustafsson
+  </nav>
+</header>

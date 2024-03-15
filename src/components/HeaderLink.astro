@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import { OpenInNewWindowIcon } from '@radix-ui/react-icons'
+
+type Props = HTMLAttributes<'a'> & { newTab?: boolean }
+
+const { href, class: className, newTab, ...props } = Astro.props
+
+const { pathname } = Astro.url
+const subpath = pathname.match(/[^\/]+/g)
+const isActive = href === pathname || href === '/' + subpath?.[0]
+---
+
+<a
+  class="group relative inline-flex flex-col"
+  href={href}
+  class:list={[
+    className,
+    { active: isActive },
+    'cursor-pointer hover:text-beige-500',
+  ]}
+  {...props}
+>
+  <span class="flex items-center gap-1 group-hover:text-tropicalblue-700">
+    <slot />
+    {newTab && <OpenInNewWindowIcon strokeWidth={0.3} stroke="currentColor" />}
+  </span>
+  {
+    newTab && (
+      <span class="absolute top-5 text-sm font-normal w-max hidden group-hover:block animate-in fade-in slide-in-from-top ease-in-out">
+        Opens in a new tab
+      </span>
+    )
+  }
+</a>

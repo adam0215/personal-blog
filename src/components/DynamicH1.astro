@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'h1'> & { dynamicEndingList: string[] }
+
+const { class: className, dynamicEndingList, ...props } = Astro.props
+
+function getRandomInt(max: number) {
+  return Math.floor(Math.random() * max)
+}
+
+const randomEnding =
+  dynamicEndingList?.length <= 1
+    ? dynamicEndingList[0]
+    : dynamicEndingList[getRandomInt(dynamicEndingList?.length - 1)]
+---
+
+<h1 class={className} {...props}>
+  <slot />
+  {randomEnding}
+</h1>

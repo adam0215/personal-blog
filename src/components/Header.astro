@@ -1,0 +1,19 @@
+---
+import HeaderLink from './HeaderLink.astro'
+import Logo from './Logo.astro'
+---
+
+<header class='w-full py-32'>
+	<nav class='flex justify-between items-center w-full'>
+		<a href='/#'>
+			<Logo class='w-12 fill-beige-500' />
+		</a>
+		<ul class='flex flex-col gap-2 font-semibold'>
+			<HeaderLink href='/#'>Home</HeaderLink>
+			<HeaderLink href='/#articles'>Articles & Thoughts</HeaderLink>
+			<HeaderLink newTab href='https://www.adamg.se' target='_blank'
+				>Portfolio</HeaderLink
+			>
+		</ul>
+	</nav>
+</header>

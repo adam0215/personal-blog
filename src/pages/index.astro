@@ -1,0 +1,67 @@
+---
+import SiteHead from '../components/SiteHead.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Body from '../components/Body.astro'
+import ArticleListItem from '../components/ArticleListItem.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+import DynamicH1 from '../components/DynamicH1.astro'
+import { getCollection } from 'astro:content'
+
+const posts = (await getCollection('articles')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+)
+---
+
+<!doctype html>
+<html
+	lang='en'
+	class='w-full min-h-screen bg-tropicalblue-500 text-beige-500 scroll-smooth'
+>
+	<head>
+		<SiteHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<Body class='flex flex-col items-center w-full px-8'>
+		<div class='max-w-[900px]'>
+			<Header />
+			<main class='flex flex-col gap-24'>
+				<section id='about'>
+					<DynamicH1
+						class='font-semibold text-4xl mb-12'
+						dynamicEndingList={[
+							"friend, I'm Adam!",
+							"companion, I'm Adam!",
+							"comrade, I'm Adam!",
+							"mate, I'm Adam!",
+							"pal, I'm Adam!",
+							"homie, I'm Adam!",
+						]}
+						>Hello
+					</DynamicH1>
+					<p>
+						{SITE_DESCRIPTION}
+					</p>
+				</section>
+				<section id='articles'>
+					<h2 class='font-semibold text-4xl mb-12'>Articles & Thoughts</h2>
+					<ul class='grid grid-cols-1 gap-6 w-full md:grid-cols-2'>
+						{
+							posts.map((p) => (
+								<li>
+									<ArticleListItem
+										title={p.data.title}
+										description={p.data.description}
+										pubDate={p.data.pubDate}
+										updatedDate={p.data.updatedDate}
+										slug={p.slug}
+									/>
+								</li>
+							))
+						}
+					</ul>
+				</section>
+			</main>
+			<Footer />
+		</div>
+	</Body>
+</html>

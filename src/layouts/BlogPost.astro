@@ -1,0 +1,89 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import SiteHead from '../components/SiteHead.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Body from '../components/Body.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+import { ArrowRightIcon } from '@radix-ui/react-icons'
+
+type Props = CollectionEntry<'articles'>['data']
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props
+---
+
+<!doctype html>
+<html
+	lang='en'
+	class='w-full min-h-screen bg-tropicalblue-500 text-beige-500 scroll-smooth'
+>
+	<head>
+		<SiteHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+
+	<Body class='flex flex-col items-center w-full px-16'>
+		<div class='max-w-[900px]'>
+			<Header />
+			<main>
+				<article class='w-full'>
+					<div class='flex flex-col gap-4'>
+						<div class='flex items-center gap-2 w-full font-semibold text-2xl'>
+							<a class='hover:underline' href='/#articles'
+								>Articles & Thoughts</a
+							>
+							<ArrowRightIcon width={28} height={28} />
+							{title}
+						</div>
+						{
+							heroImage && (
+								<img
+									src={heroImage}
+									alt=''
+									class='w-full h-[512px] bg-cover content-center rounded-[4px]'
+								/>
+							)
+						}
+
+						<div class='flex flex-col gap-2'>
+							<h1 class='font-semibold text-4xl'>{title}</h1>
+							<div class='inline-flex gap-2'>
+								<span class='font-semibold text-2xl text-tropicalblue-200'>
+									Published:
+								</span>
+								<time
+									datetime={pubDate.toISOString()}
+									class='font-semibold text-2xl text-tropicalblue-200'
+								>
+									{pubDate.toLocaleDateString()}
+								</time>
+								{
+									updatedDate && updatedDate !== pubDate && (
+										<>
+											<span class='font-semibold text-2xl text-tropicalblue-200'>
+												Updated:
+											</span>
+											<time
+												datetime={pubDate.toISOString()}
+												class='font-semibold text-2xl text-tropicalblue-200'
+											>
+												{updatedDate?.toLocaleDateString()}
+											</time>
+										</>
+									)
+								}
+							</div>
+						</div>
+
+						<hr class='border-[1px] border-beige-500 rounded-[1px]' />
+
+						<div class='article-content'>
+							<!-- CONTENT -->
+							<slot />
+						</div>
+					</div>
+				</article>
+				<Footer />
+			</main>
+		</div>
+	</Body>
+</html>
