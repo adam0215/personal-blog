@@ -7,7 +7,7 @@ import react from '@astrojs/react'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://helloadam.co',
+  site: 'https://www.helloadam.co',
   integrations: [mdx(), sitemap(), tailwind(), react()],
 
   markdown: {
